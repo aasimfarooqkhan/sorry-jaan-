@@ -2,107 +2,260 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>MAGISTRATE</title>
+<title>Eid Surprise 💕</title>
 
 <style>
 body {
   margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #1a1a2e, #0f3460);
+  overflow: hidden;
+  color: white;
+}
+
+/* Screens */
+.screen {
+  display: none;
   height: 100vh;
-  background: radial-gradient(circle at top, #1b1b1b, #000000);
-  display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Georgia", serif;
-  overflow: hidden;
-}
-
-.card {
-  background: linear-gradient(145deg, #111, #1c1c1c);
-  padding: 42px;
-  border-radius: 16px;
-  max-width: 440px;
-  width: 85%;
+  flex-direction: column;
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-  animation: fadeIn 2.5s ease forwards;
 }
 
-h1 {
-  font-size: 30px;
-  color: #d4af37; /* gold */
-  margin-bottom: 6px;
-  letter-spacing: 1px;
+.screen.active { display: flex; }
+
+/* Buttons */
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
 }
 
-h2 {
-  font-size: 15px;
-  color: #aaa;
-  letter-spacing: 3px;
-  margin-bottom: 26px;
+#yesBtn { background: #ff4b5c; color: white; }
+#noBtn { background: gray; color: white; position: absolute; }
+
+/* Text styles */
+h1 { font-size: 2.5rem; }
+.loveText { font-size: 3rem; animation: glow 1.5s infinite alternate; }
+.eidText { font-size: 3rem; }
+
+/* Moon */
+.moon {
+  position: absolute;
+  top: 50px;
+  right: 80px;
+  width: 100px;
+  height: 100px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 30px #fff;
 }
 
-p {
-  font-size: 17px;
-  line-height: 1.7;
-  color: #e0e0e0;
+/* Stars */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  animation: twinkle 2s infinite;
 }
 
-.quote {
-  margin-top: 20px;
-  font-style: italic;
-  color: #c9b037;
-  font-size: 16px;
+/* Mosque */
+.mosque {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background: black;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 60%, 90% 60%, 85% 30%, 80% 60%, 60% 60%, 55% 30%, 50% 60%, 0% 60%);
 }
 
-.signature {
-  margin-top: 30px;
-  font-size: 15px;
-  letter-spacing: 1px;
-  color: #ffffff;
+/* Hearts */
+.heart {
+  position: absolute;
+  color: pink;
+  animation: floatUp 5s linear infinite;
 }
 
-.signature b {
-  color: #d4af37;
+/* Animations */
+@keyframes glow {
+  from { text-shadow: 0 0 10px white; }
+  to { text-shadow: 0 0 25px red; }
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
+@keyframes twinkle {
+  50% { opacity: 0.3; }
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-10vh); }
+}
+
+/* Fireworks */
+.firework {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
   to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: scale(20);
+    opacity: 0;
   }
+}
+
+/* Typing */
+.message {
+  max-width: 600px;
+  font-size: 1.5rem;
+  border-right: 2px solid white;
+  white-space: pre-line;
+  overflow: hidden;
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>AASIM FAROOQ</h1>
-  <h2>LAW STUDENT</h2>
+<div class="moon"></div>
+<div class="mosque"></div>
 
-  <p>
-    Silence is strategy.<br>
-    Discipline is dominance.<br>
-    The law yields to those who master restraint rather than reaction.
-  </p>
+<div id="app">
 
-  <div class="quote">
-    “Justice does not require noise — it requires authority.”
-  </div>
-
-  <div class="signature">
-    — <b>JURIS TRAINEE</b>
-  </div>
+<!-- Step 1 -->
+<div id="step1" class="screen active">
+  <h1>💖 Do you agree to be my wife forever? 💖</h1>
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No 💔</button>
 </div>
 
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-epic.mp3" type="audio/mpeg">
+<!-- Step 2 -->
+<div id="step2" class="screen">
+  <h1 class="loveText">ASIM FAROOQ ❤️ AYLA</h1>
+</div>
+
+<!-- Step 3 -->
+<div id="step3" class="screen">
+  <h1 class="eidText">🌙 Eid ul Fitr Mubarak 🌙</h1>
+</div>
+
+<!-- Step 4 -->
+<div id="step4" class="screen">
+  <div class="message" id="typing"></div>
+</div>
+
+</div>
+
+<!-- Audio -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/03/14/audio_9f6c13c6c3.mp3" type="audio/mpeg">
 </audio>
 
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+const step1 = document.getElementById("step1");
+const step2 = document.getElementById("step2");
+const step3 = document.getElementById("step3");
+const step4 = document.getElementById("step4");
+
+const music = document.getElementById("bgMusic");
+
+// Stars generator
+for(let i=0;i<50;i++){
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random()*100+"%";
+  star.style.left = Math.random()*100+"%";
+  document.body.appendChild(star);
+}
+
+// Hearts generator
+function createHeart(){
+  let heart = document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💕";
+  heart.style.left=Math.random()*100+"%";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHeart,500);
+
+// Fireworks
+function firework(){
+  let fw=document.createElement("div");
+  fw.className="firework";
+  fw.style.top=Math.random()*100+"%";
+  fw.style.left=Math.random()*100+"%";
+  document.body.appendChild(fw);
+  setTimeout(()=>fw.remove(),1000);
+}
+
+// No button escape (works on mobile too)
+function moveNo(){
+  noBtn.style.left=Math.random()*80+"%";
+  noBtn.style.top=Math.random()*80+"%";
+}
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+// Typing effect
+function typeText(text){
+  let i=0;
+  let el=document.getElementById("typing");
+  function typing(){
+    if(i<text.length){
+      el.innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(typing,40);
+    }
+  }
+  typing();
+}
+
+// Flow
+yesBtn.onclick=()=>{
+  music.play();
+
+  step1.classList.remove("active");
+  step2.classList.add("active");
+
+  setTimeout(()=>{
+    step2.classList.remove("active");
+    step3.classList.add("active");
+
+    // fireworks burst
+    let fwInt=setInterval(firework,200);
+
+    setTimeout(()=>{
+      clearInterval(fwInt);
+      step3.classList.remove("active");
+      step4.classList.add("active");
+
+      typeText(`My Dear Ayla ❤️
+
+You are my love, my respect, and my loyalty.
+You are the peace in my life and the happiness in my heart.
+
+On this beautiful Eid,
+I promise to stand beside you forever.
+
+💕 Eid Mubarak, My Love 💕`);
+    },4000);
+
+  },3000);
+};
+</script>
+
 </body>
-</html>
+  </html>
